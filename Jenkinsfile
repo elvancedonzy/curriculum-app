@@ -8,25 +8,14 @@ pipeline {
     }
 
     stage('Log') {
-      parallel {
-        stage('Log') {
-          steps {
-            sh 'ls -latr'
-          }
-        }
-
-        stage('Front-End Unit Test /Shell Script') {
-          steps {
-            sh 'cd curriculum-front && npm i && npm run test:unit'
-          }
-        }
-
+      steps {
+        sh 'ls -latr'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'docker build -f curriculum-front/Dockerfile -t fuze365/curriculum-front:latest .'
+        sh 'docker build -f curriculum-front/Dockerfile .'
       }
     }
 
